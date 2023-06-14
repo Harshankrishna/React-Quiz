@@ -6,9 +6,15 @@ import { database } from "../firebase-config";
 import { getDocs, collection } from "firebase/firestore";
 import Table from "./common/Table";
 import Divider from "@mui/material/Divider";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase-config";
 export default function Result() {
-  const databaseRef = collection(database, "Leader Board");
   const navigate = useNavigate();
+  onAuthStateChanged(auth, (currentUser) => {
+    if (!currentUser) navigate("/login");
+  });
+  const databaseRef = collection(database, "Leader Board");
+  // const navigate = useNavigate();
   const { state } = useLocation();
   const [finalResult, setFinalResult] = React.useState(null);
   const [leaderBoardData, setLeaderBoardData] = React.useState([]);
@@ -48,6 +54,15 @@ export default function Result() {
         style={{ marginBottom: 30 }}
       >
         Play Again
+      </Button>
+      <Button
+        onClick={() => {
+          signOut(auth);
+        }}
+        variant="contained"
+        style={{ marginBottom: 30, marginLeft: 20 }}
+      >
+        Logout
       </Button>
       <Divider />
       <h2>Leader Board</h2>
