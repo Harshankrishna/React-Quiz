@@ -38,10 +38,11 @@ const Register = () => {
               email,
               //   photoURL: downloadURL,
             });
+            navigate("/");
 
             //create empty user chats on firestore
-            await setDoc(doc(database, "userChats", res.user.uid), {});
-            navigate("/");
+            // await setDoc(doc(database, "userChats", res.user.uid), {});
+            // navigate("/");
           } catch (err) {
             console.log(err);
             setErr(true);

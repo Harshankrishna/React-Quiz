@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Select from "./common/Select";
 import Input from "./common/Input";
 import QuizDifficulty from "./common/DifficultySelect";
@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Quiz() {
   onAuthStateChanged(auth, (currentUser) => {
@@ -17,6 +18,7 @@ export default function Quiz() {
   });
 
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
   const [quizCount, setQuizCount] = React.useState("10");
   const [quizType, setQuizType] = React.useState("");
   const [quizDifficulty, setQuizDifficulty] = React.useState("easy");

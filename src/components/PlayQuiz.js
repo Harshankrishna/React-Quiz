@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Card from "./common/Card";
@@ -6,6 +6,7 @@ import { database } from "../firebase-config";
 import { addDoc, collection } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase-config";
+// import { AuthContext } from "../context/AuthContext";
 
 import moment from "moment";
 export default function PlayQuiz() {
@@ -15,6 +16,7 @@ export default function PlayQuiz() {
   });
   const { state } = useLocation();
   //   const navigate = useNavigate();
+  // const { currentUser } = useContext(AuthContext);
   const [questionCounter, setQuesCounter] = useState(1);
   const [totalQuiz, setTotalQuiz] = useState(1);
   const [questionsArray, setQuesArray] = useState([]);
